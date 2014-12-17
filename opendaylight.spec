@@ -17,6 +17,7 @@ Requires:       java >= 1:1.7.0
 OpenDaylight Helium SR1 (0.2.1)
 
 %prep
+# TODO: Should be able to use %autosetup -n <name> to get proper name, vs work described in README
 %setup -q
 
 
