@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Setup system
-sudo yum install -y @development-tools fedora-packager wget java-1.7.0-openjdk
+sudo yum install -y @development-tools fedora-packager java-1.7.0-openjdk
 sudo usermod -a -G mock $USER
 
 # Configure rpmbuild dir
