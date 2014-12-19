@@ -40,3 +40,5 @@ cp -r ../distribution-karaf-0.2.1-Helium-SR1.1/* $RPM_BUILD_ROOT/opt/%name-%vers
 
 
 %changelog
+* Tue Dec 16 2014 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-1
+- Initial RPM
