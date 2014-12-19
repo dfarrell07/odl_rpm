@@ -9,16 +9,13 @@ URL:		http://www.opendaylight.org
 BuildArch:  noarch
 Source0:	https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1/distribution-karaf-0.2.1-Helium-SR1.tar.gz
 
-Requires:       java >= 1:1.7.0
+Requires:   java >= 1:1.7.0
 
 %description
 OpenDaylight Helium SR1 (0.2.1)
 
 %prep
 %autosetup -n distribution-karaf-0.2.1-Helium-SR1
-
-
-%build
 
 
 %install
