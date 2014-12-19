@@ -8,4 +8,4 @@ sudo yum install -y java-1.7.0-openjdk
 
 sudo rpm -i $rpm_path
 echo "You'll need to add /opt/opendaylight-0.2.1/bin to your path:"
-echo "\texport PATH=\$PATH:/opt/opendaylight-0.2.1/bin"
+echo "export PATH=\$PATH:/opt/opendaylight-0.2.1/bin"
