@@ -11,4 +11,11 @@ cp opendaylight.spec $HOME/rpmbuild/SPECS
 
 # Build
 cd $HOME/rpmbuild/SPECS
-rpmbuild -ba opendaylight.spec
+rpmbuild -bb opendaylight.spec
+
+if [ -f  ~/rpmbuild/RPMS/noarch/opendaylight-0.2.1-1.fc20.noarch.rpm ]; then
+    echo "RPM built!"
+    echo "Should be at: ~/rpmbuild/RPMS/noarch/opendaylight-0.2.1-1.fc20.noarch.rpm"
+else
+    echo "RPM seems to have failed. :(" &>2
+fi
