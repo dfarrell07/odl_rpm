@@ -14,6 +14,21 @@ Source0:	https://nexus.opendaylight.org/content/repositories/public/org/opendayl
 Buildroot:  /tmp
 
 Requires:   java >= 1:1.7.0
+#Requires(pre): /usr/sbin/useradd, /usr/bin/getent
+Requires(pre): /usr/sbin/groupadd
+# TODO: Remove this once done testing
+#Requires(postun): /usr/sbin/userdel
+
+%pre
+# TODO: For whatever reason, non-root user that's a member of odl group doesn't seem to have correct permissions to run `karaf`
+#   Somewhat confused, as `id` doesn't show `fedora` as member of `odl` group, but `sudo usermod -a -G odl fedora` reports that
+#   it has already been done.
+/usr/sbin/groupadd odl
+#/usr/bin/getent passwd odl || /usr/sbin/useradd -r -d /opt/%name-%version -s /sbin/nologin odl
+
+# TODO: Remove this once done testing
+%postun
+#/usr/sbin/userdel odl
 
 %description
 OpenDaylight Helium SR1.1 (0.2.1)
@@ -34,7 +49,7 @@ cp -r ../distribution-karaf-0.2.1-Helium-SR1.1/* $RPM_BUILD_ROOT/opt/%name-%vers
 
 %files
 # TODO: Figure out how to do this more elegantly (without 0777)
-%defattr(0777,root,root,0777)
+%defattr(0775,root,odl,0775)
 #%attr(0777, root, root) /opt/%name-%version/data/log/karaf.log
 /opt/%name-%version/
 
