@@ -17,5 +17,5 @@ echo "Executing: sudo usermod -a -G odl $USER"
 sudo usermod -a -G odl $USER
 
 echo "You'll need to add /opt/opendaylight-0.2.1/bin to your path"
-echo "May want to add this to ~/.bashrc, for effect after logout/login"
 echo "export PATH=\$PATH:/opt/opendaylight-0.2.1/bin"
+echo "^^May want to add this to ~/.bashrc, for effect after logout/login"
