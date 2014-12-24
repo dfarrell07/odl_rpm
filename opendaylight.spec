@@ -1,6 +1,5 @@
-# These take a *really* long time and doesn't seem to be necessary, so skip
+# The jar_repack steps takes *really* long time and doesn't seem to be necessary, so skip
 %define __jar_repack 0
-%define _unpackaged_files_terminate_build 0
 
 Name:       opendaylight
 Version:    0.2.1
