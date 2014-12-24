@@ -1,4 +1,4 @@
-# The jar_repack steps takes *really* long time and doesn't seem to be necessary, so skip
+# jar_repack step takes a long time and doesn't seem to be necessary, so skip
 %define __jar_repack 0
 
 Name:       opendaylight
@@ -17,7 +17,8 @@ Requires:   java >= 1:1.7.0
 Requires(pre): shadow-utils
 
 %pre
-getent group odl >/dev/null || groupadd -r odl
+# Short circuits if the group already exists
+getent group odl > /dev/null || groupadd odl
 
 %description
 OpenDaylight Helium SR1.1 (0.2.1)
@@ -30,6 +31,7 @@ mkdir -p $RPM_BUILD_ROOT/opt/%name-%version
 cp -r ../distribution-karaf-0.2.1-Helium-SR1.1/* $RPM_BUILD_ROOT/opt/%name-%version
 
 %files
+# Note that the group, odl, has full perms. Running user must be a member.
 %defattr(0775,root,odl,0775)
 /opt/%name-%version/
 
