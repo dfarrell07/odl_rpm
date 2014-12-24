@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# Update if needed
+rpm_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.1-1.fc20.noarch.rpm"
+
 # Setup system
 sudo yum install -y @development-tools fedora-packager java-1.7.0-openjdk
 sudo usermod -a -G mock $USER
@@ -13,9 +16,9 @@ cp opendaylight.spec $HOME/rpmbuild/SPECS
 cd $HOME/rpmbuild/SPECS
 rpmbuild -bb opendaylight.spec
 
-if [ -f  ~/rpmbuild/RPMS/noarch/opendaylight-0.2.1-1.fc20.noarch.rpm ]; then
+if [ -f  $rpm_path ]; then
     echo "RPM built!"
-    echo "Should be at: ~/rpmbuild/RPMS/noarch/opendaylight-0.2.1-1.fc20.noarch.rpm"
+    echo "Should be at: $rpm_path"
 else
     echo "RPM seems to have failed. :(" &>2
 fi
