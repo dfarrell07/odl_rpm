@@ -1,0 +1,11 @@
+[Unit]
+Description=OpenDaylight Software Defined Networking Controller
+Documentation=https://wiki.opendaylight.org/view/Main_Page http://www.opendaylight.org/
+After=network.service
+
+[Service]
+Type=forking
+ExecStart=/opt/opendaylight-0.2.1/bin/start
+
+[Install]
+WantedBy=multi-user.target
