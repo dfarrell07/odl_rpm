@@ -10,6 +10,7 @@ sudo usermod -a -G mock $USER
 # Configure rpmbuild dir
 rpmdev-setuptree
 curl -o $HOME/rpmbuild/SOURCES/distribution-karaf-0.2.1-Helium-SR1.1.tar.gz https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1.1/distribution-karaf-0.2.1-Helium-SR1.1.tar.gz
+cp opendaylight.service $HOME/rpmbuild/SOURCES
 cp opendaylight.spec $HOME/rpmbuild/SPECS
 
 # Build
