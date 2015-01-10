@@ -1,5 +1,5 @@
 [Unit]
-Description=OpenDaylight Software Defined Networking Controller
+Description=OpenDaylight SDN Controller
 Documentation=https://wiki.opendaylight.org/view/Main_Page http://www.opendaylight.org/
 After=network.service
 
