@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Update if needed
-rpm_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.1-1.fc20.noarch.rpm"
+rpm_path="$HOME/rpmbuild/RPMS/noarch/opendaylight-0.2.1-3.fc20.noarch.rpm"
 
 # Install software required by ODL
 echo "Installing Java (required by ODL)"

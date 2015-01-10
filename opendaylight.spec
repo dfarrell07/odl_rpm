@@ -3,7 +3,7 @@
 
 Name:       opendaylight
 Version:    0.2.1
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -41,6 +41,12 @@ mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 # Move ODL's systemd .service file to correct dir in build root
 cp ../../SOURCES/opendaylight.service $RPM_BUILD_ROOT/%{_unitdir}
 
+%postun
+# When the RPM is removed, the subdirs containing new files wouldn't normally
+#   be deleted. Manually clean them up.
+#   Warning: This does assume there's no data there that should be persevered
+rm -rf $RPM_BUILD_ROOT/opt/%name-%version
+
 %files
 # Users who work with OpenDaylight should be in the odl group
 %attr(0775,root,odl) /opt/%name-%version/
@@ -49,7 +55,9 @@ cp ../../SOURCES/opendaylight.service $RPM_BUILD_ROOT/%{_unitdir}
 
 
 %changelog
-* Tue Dec 16 2014 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-1
-- Initial Karaf-based RPM
+* Sat Jan 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-3
+- Completely clean up ODL after uninstall
 * Fri Jan 9 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-2
 - Added systemd configuration
+* Tue Dec 16 2014 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-1
+- Initial Karaf-based RPM
