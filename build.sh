@@ -23,15 +23,16 @@ else
     curl -o $HOME/rpmbuild/SOURCES/$src_name https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1.1/$src_name
 fi
 
-# Put systemd unit file somewhere we can access it from .spec
-cp opendaylight.service $HOME/rpmbuild/SOURCES
+# Put systemd unit file archive in rpmbuild's SOURCES dir
+# Need `-L` to follow redirects
+curl -L -o $HOME/rpmbuild/SOURCES/opendaylight-systemd-b080cdc.tar.gz https://github.com/dfarrell07/opendaylight-systemd/archive/b080cdc/opendaylight-systemd-b080cdc.tar.gz
 
 # Put ODL RPM .spec file in location required by rpmbuild
 cp opendaylight.spec $HOME/rpmbuild/SPECS
 
 # Build ODL RPM
 cd $HOME/rpmbuild/SPECS
-rpmbuild -bb opendaylight.spec
+rpmbuild -ba opendaylight.spec
 
 # Confirm RPM found in expected location
 if [ -f  $rpm_out_path ]; then

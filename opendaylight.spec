@@ -1,9 +1,11 @@
 # jar_repack step takes a long time and doesn't seem to be necessary, so skip
 %define __jar_repack 0
+%global commit b080cdc3f5396abcf24f522799be1f8c8bf424c2
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:       opendaylight
 Version:    0.2.1
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -11,6 +13,7 @@ License:    EPL-1.0
 URL:        http://www.opendaylight.org
 BuildArch:  noarch
 Source0:    https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1.1/distribution-karaf-0.2.1-Helium-SR1.1.tar.gz
+Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/b080cdc/opendaylight-systemd-%{shortcommit}.tar.gz
 Buildroot:  /tmp
 
 # Required for ODL at run time
@@ -30,6 +33,7 @@ OpenDaylight Helium SR1.1 (0.2.1)
 %prep
 # Extract ODL archive into dir with given name (-n)
 %autosetup -n distribution-karaf-0.2.1-Helium-SR1.1
+%autosetup -T -D -b 1 -n opendaylight-systemd-%{commit}
 
 %install
 # Create directory in build root for ODL
@@ -39,7 +43,7 @@ cp -r ../distribution-karaf-0.2.1-Helium-SR1.1/* $RPM_BUILD_ROOT/opt/%name-%vers
 # Create directory in build root for systemd .service file
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 # Move ODL's systemd .service file to correct dir in build root
-cp ../../SOURCES/opendaylight.service $RPM_BUILD_ROOT/%{_unitdir}
+cp ../../BUILD/opendaylight-systemd-%{commit}/opendaylight.service $RPM_BUILD_ROOT/%{_unitdir}
 
 %postun
 # When the RPM is removed, the subdirs containing new files wouldn't normally
@@ -55,6 +59,8 @@ rm -rf $RPM_BUILD_ROOT/opt/%name-%version
 
 
 %changelog
+* Mon Jan 12 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-4
+- Added systemd config as a source
 * Sat Jan 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-3
 - Completely clean up ODL after uninstall
 * Fri Jan 9 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-2
