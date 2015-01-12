@@ -9,3 +9,4 @@ rsync install.sh $HOST:/home/fedora/
 rsync opendaylight.service $HOST:/home/fedora/
 rsync opendaylight.spec $HOST:/home/fedora/
 rsync uninstall.sh $HOST:/home/fedora/
+rsync opendaylight.repo $HOST:/home/fedora
