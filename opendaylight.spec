@@ -1,5 +1,7 @@
 # jar_repack step takes a long time and doesn't seem to be necessary, so skip
 %define __jar_repack 0
+
+# Update this commit if systemd unit file is updated
 %global commit b080cdc3f5396abcf24f522799be1f8c8bf424c2
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
