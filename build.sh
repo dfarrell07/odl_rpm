@@ -2,7 +2,7 @@
 
 # Common paths used in this script
 # NB: Name will need to be updated for both ODL and RMP version bumps
-rpm_name="opendaylight-0.2.1-3.fc20.noarch.rpm"
+rpm_name="opendaylight-0.2.1-4.fc20.noarch.rpm"
 rpm_out_path="$HOME/rpmbuild/RPMS/noarch/$rpm_name"
 src_name="distribution-karaf-0.2.1-Helium-SR1.1.tar.gz"
 src_cache_path="$HOME/$src_name"
