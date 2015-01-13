@@ -6,9 +6,10 @@ rpm_name="opendaylight-0.2.1-4.fc20.noarch.rpm"
 rpm_out_path="$HOME/rpmbuild/RPMS/noarch/$rpm_name"
 src_name="distribution-karaf-0.2.1-Helium-SR1.1.tar.gz"
 src_cache_path="$HOME/$src_name"
+sysd_commit=520321a
 
 # Install required software, add user to mock group for rpmbuild
-sudo yum install -y @development-tools fedora-packager java-1.7.0-openjdk
+sudo yum install -y @development-tools fedora-packager
 sudo usermod -a -G mock $USER
 
 # Configure rpmbuild dir
@@ -25,7 +26,7 @@ fi
 
 # Put systemd unit file archive in rpmbuild's SOURCES dir
 # Need `-L` to follow redirects
-curl -L -o $HOME/rpmbuild/SOURCES/opendaylight-systemd-b080cdc.tar.gz https://github.com/dfarrell07/opendaylight-systemd/archive/b080cdc/opendaylight-systemd-b080cdc.tar.gz
+curl -L -o $HOME/rpmbuild/SOURCES/opendaylight-systemd-$sysd_commit.tar.gz https://github.com/dfarrell07/opendaylight-systemd/archive/$sysd_commit/opendaylight-systemd-$sysd_commit.tar.gz
 
 # Put ODL RPM .spec file in location required by rpmbuild
 cp opendaylight.spec $HOME/rpmbuild/SPECS
