@@ -2,12 +2,12 @@
 %define __jar_repack 0
 
 # Update this commit if systemd unit file is updated
-%global commit b080cdc3f5396abcf24f522799be1f8c8bf424c2
+%global commit 520321a932a15392a67f45bae52e879c703a2c85
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:       opendaylight
 Version:    0.2.1
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -26,15 +26,18 @@ Requires(pre): shadow-utils
 BuildRequires: systemd
 
 %pre
-# Short circuits if the group already exists
+# Create `odl` user/group
+# Short circuits if the user/group already exists
+getent passwd odl > /dev/null || useradd odl -M
 getent group odl > /dev/null || groupadd odl
 
 %description
 OpenDaylight Helium SR1.1 (0.2.1)
 
 %prep
-# Extract ODL archive into dir with given name (-n)
+# Extract Source0 (ODL archive)
 %autosetup -n distribution-karaf-0.2.1-Helium-SR1.1
+# Extract Source1 (systemd config)
 %autosetup -T -D -b 1 -n opendaylight-systemd-%{commit}
 
 %install
@@ -54,13 +57,15 @@ cp ../../BUILD/opendaylight-systemd-%{commit}/opendaylight.service $RPM_BUILD_RO
 rm -rf $RPM_BUILD_ROOT/opt/%name-%version
 
 %files
-# Users who work with OpenDaylight should be in the odl group
-%attr(0775,root,odl) /opt/%name-%version/
+# ODL uses systemd to run as user:group odl:odl
+%attr(0775,odl,odl) /opt/%name-%version/
 # Configure systemd
 %attr(0644,-,-) %{_unitdir}/%name.service
 
 
 %changelog
+* Tue Jan 13 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-5
+- Set ODL ownership to odl:odl vs root:odl
 * Mon Jan 12 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-4
 - Added systemd config as a source
 * Sat Jan 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-3
