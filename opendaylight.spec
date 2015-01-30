@@ -7,7 +7,7 @@
 
 Name:       opendaylight
 Version:    0.2.1
-Release:    5%{?dist}
+Release:    6%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -28,7 +28,8 @@ BuildRequires: systemd
 %pre
 # Create `odl` user/group
 # Short circuits if the user/group already exists
-getent passwd odl > /dev/null || useradd odl -M
+# Home dir must be a valid path for various files to be created in it
+getent passwd odl > /dev/null || useradd odl -M -d $RPM_BUILD_ROOT/opt/%name-%version
 getent group odl > /dev/null || groupadd odl
 
 %description
@@ -64,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT/opt/%name-%version
 
 
 %changelog
+* Thu Jan 29 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-6
+- Give odl user a valid home dir for automatically created files
 * Tue Jan 13 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-5
 - Set ODL ownership to odl:odl vs root:odl
 * Mon Jan 12 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-4
