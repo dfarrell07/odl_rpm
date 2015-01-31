@@ -6,15 +6,15 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:       opendaylight
-Version:    0.2.1
-Release:    6%{?dist}
+Version:    0.2.2
+Release:    7%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
 License:    EPL-1.0
 URL:        http://www.opendaylight.org
 BuildArch:  noarch
-Source0:    https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.2.1-Helium-SR1.1/distribution-karaf-0.2.1-Helium-SR1.1.tar.gz
+Source0:    https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.2-Helium-SR2/distribution-karaf-0.2.2-Helium-SR2.tar.gz
 Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/b080cdc/opendaylight-systemd-%{shortcommit}.tar.gz
 Buildroot:  /tmp
 
@@ -33,11 +33,11 @@ getent passwd odl > /dev/null || useradd odl -M -d $RPM_BUILD_ROOT/opt/%name-%ve
 getent group odl > /dev/null || groupadd odl
 
 %description
-OpenDaylight Helium SR1.1 (0.2.1)
+OpenDaylight Helium SR2 (0.2.2)
 
 %prep
 # Extract Source0 (ODL archive)
-%autosetup -n distribution-karaf-0.2.1-Helium-SR1.1
+%autosetup -n distribution-karaf-0.2.2-Helium-SR2
 # Extract Source1 (systemd config)
 %autosetup -T -D -b 1 -n opendaylight-systemd-%{commit}
 
@@ -45,7 +45,7 @@ OpenDaylight Helium SR1.1 (0.2.1)
 # Create directory in build root for ODL
 mkdir -p $RPM_BUILD_ROOT/opt/%name-%version
 # Move ODL from archive to its dir in build root
-cp -r ../distribution-karaf-0.2.1-Helium-SR1.1/* $RPM_BUILD_ROOT/opt/%name-%version
+cp -r ../distribution-karaf-0.2.2-Helium-SR2/* $RPM_BUILD_ROOT/opt/%name-%version
 # Create directory in build root for systemd .service file
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 # Move ODL's systemd .service file to correct dir in build root
@@ -65,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT/opt/%name-%version
 
 
 %changelog
+* Sat Jan 31 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-1
+- Upgrade from Helium SR1.1 to Helium SR2
 * Thu Jan 29 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-6
 - Give odl user a valid home dir for automatically created files
 * Tue Jan 13 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-5
