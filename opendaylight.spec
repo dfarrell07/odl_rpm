@@ -2,12 +2,12 @@
 %define __jar_repack 0
 
 # Update this commit if systemd unit file is updated
-%global commit 520321a932a15392a67f45bae52e879c703a2c85
+%global commit f984005039c39596a6cf4e7718b44a48db0ba849
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:       opendaylight
 Version:    0.2.2
-Release:    7%{?dist}
+Release:    1%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
