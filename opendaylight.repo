@@ -1,5 +1,0 @@
-[opendaylight]
-name=opendaylight
-baseurl=http://104.131.189.230/repository/
-gpgcheck=0
-enabled=1
