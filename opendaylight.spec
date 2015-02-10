@@ -15,7 +15,7 @@ License:    EPL-1.0
 URL:        http://www.opendaylight.org
 BuildArch:  noarch
 Source0:    https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.2.2-Helium-SR2/distribution-karaf-0.2.2-Helium-SR2.tar.gz
-Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/b080cdc/opendaylight-systemd-%{shortcommit}.tar.gz
+Source1:    https://github.com/dfarrell07/opendaylight-systemd/archive/%{shortcommit}/opendaylight-systemd-%{shortcommit}.tar.gz
 Buildroot:  /tmp
 
 # Required for ODL at run time
@@ -65,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT/opt/%name-%version
 
 
 %changelog
+* Tue Feb 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-2
+- Bugfix in URL to download ODL systemd .service file
 * Sat Jan 31 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-1
 - Upgrade from Helium SR1.1 to Helium SR2
 * Thu Jan 29 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.1-6
