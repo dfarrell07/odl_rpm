@@ -7,7 +7,7 @@
 
 Name:       opendaylight
 Version:    0.2.2
-Release:    1%{?dist}
+Release:    3%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -29,7 +29,7 @@ BuildRequires: systemd
 # Create `odl` user/group
 # Short circuits if the user/group already exists
 # Home dir must be a valid path for various files to be created in it
-getent passwd odl > /dev/null || useradd odl -M -d $RPM_BUILD_ROOT/opt/%name-%version
+getent passwd odl > /dev/null || useradd odl -M -d $RPM_BUILD_ROOT/opt/%name
 getent group odl > /dev/null || groupadd odl
 
 %description
@@ -43,9 +43,9 @@ OpenDaylight Helium SR2 (0.2.2)
 
 %install
 # Create directory in build root for ODL
-mkdir -p $RPM_BUILD_ROOT/opt/%name-%version
+mkdir -p $RPM_BUILD_ROOT/opt/%name
 # Move ODL from archive to its dir in build root
-cp -r ../distribution-karaf-0.2.2-Helium-SR2/* $RPM_BUILD_ROOT/opt/%name-%version
+cp -r ../distribution-karaf-0.2.2-Helium-SR2/* $RPM_BUILD_ROOT/opt/%name
 # Create directory in build root for systemd .service file
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 # Move ODL's systemd .service file to correct dir in build root
@@ -55,16 +55,18 @@ cp ../../BUILD/opendaylight-systemd-%{commit}/opendaylight.service $RPM_BUILD_RO
 # When the RPM is removed, the subdirs containing new files wouldn't normally
 #   be deleted. Manually clean them up.
 #   Warning: This does assume there's no data there that should be persevered
-rm -rf $RPM_BUILD_ROOT/opt/%name-%version
+rm -rf $RPM_BUILD_ROOT/opt/%name
 
 %files
 # ODL uses systemd to run as user:group odl:odl
-%attr(0775,odl,odl) /opt/%name-%version/
+%attr(0775,odl,odl) /opt/%name
 # Configure systemd
 %attr(0644,-,-) %{_unitdir}/%name.service
 
 
 %changelog
+* Fri Mar 13 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-3
+- Don't include ODL version in ODL dir name
 * Tue Feb 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-2
 - Bugfix in URL to download ODL systemd .service file
 * Sat Jan 31 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-1
