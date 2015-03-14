@@ -7,7 +7,7 @@ rpm_out_path="$HOME/rpmbuild/RPMS/noarch/$rpm_name"
 src_name="distribution-karaf-0.2.2-Helium-SR2.tar.gz"
 src_cache_path0="$HOME/$src_name"
 src_cache_path1="/vagrant/$src_name"
-sysd_commit=f984005
+sysd_commit=4a87227
 
 # Install required software, add user to mock group for rpmbuild
 sudo yum install -y @development-tools fedora-packager

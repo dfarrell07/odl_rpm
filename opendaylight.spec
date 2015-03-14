@@ -2,7 +2,7 @@
 %define __jar_repack 0
 
 # Update this commit if systemd unit file is updated
-%global commit f984005039c39596a6cf4e7718b44a48db0ba849
+%global commit 4a872270893f0daeebcbbcc0ff0014978e3c5f68
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:       opendaylight
