@@ -7,7 +7,7 @@
 
 Name:       opendaylight
 Version:    0.2.2
-Release:    3%{?dist}
+Release:    4%{?dist}
 Summary:    OpenDaylight SDN Controller
 
 Group:      Applications/Communications
@@ -58,13 +58,15 @@ cp ../../BUILD/opendaylight-systemd-%{commit}/opendaylight.service $RPM_BUILD_RO
 rm -rf $RPM_BUILD_ROOT/opt/%name
 
 %files
-# ODL uses systemd to run as user:group odl:odl
-%attr(0775,odl,odl) /opt/%name
-# Configure systemd
-%attr(0644,-,-) %{_unitdir}/%name.service
+# ODL will run as odl:odl, set as user:group for ODL dir, dont override mode
+%attr(-,odl,odl) /opt/%name
+# Configure systemd unitfile user/group/mode
+%attr(0644,root,root) %{_unitdir}/%name.service
 
 
 %changelog
+* Sun Mar 15 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-4
+- Don't override ODL dir mode, explicitly set unitfile owner:group
 * Fri Mar 13 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-3
 - Don't include ODL version in ODL dir name
 * Tue Feb 10 2015 Daniel Farrell <dfarrell@redhat.com> - 0.2.2-2
